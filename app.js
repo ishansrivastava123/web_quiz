@@ -72,19 +72,29 @@ const questionLoad = () => {
 }
 
 const submitQuiz = () => {
-    console.log("Quiz Submitting: " + index);
-    const quesNo = questions[index];
-    let ans = getAnswer();
-    if(ans == quesNo.correct) {
-        right++;
-        // console.log("Right: " + right);
+    let length = 0;
+    options.forEach(
+        (input) => {
+            if(input.checked) {
+                length++;
+            }
+        }
+    )
+    
+    if(length == 0) {
+        document.querySelector(".error").style.display = "block";
     } else {
-        wrong++;
-        // console.log("Wrong: " + wrong);
+        const quesNo = questions[index];
+        let ans = getAnswer();
+        if(ans == quesNo.correct) {
+            right++;
+        } else {
+            wrong++;
+        }
+        index++;
+        questionLoad();
+        return;
     }
-    index++;
-    questionLoad();
-    return;
 }
 
 const getAnswer = () => {
@@ -105,6 +115,7 @@ const reset = () => {
     (input) => {
         input.checked = false;
     })
+    document.querySelector(".error").style.display = "none";
 }
 
 const endQuiz = () => {

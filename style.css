@@ -75,3 +75,10 @@ button:hover {
     text-align: center;
     margin: 10px auto;
 }
+
+.error {
+    color: red;
+    text-align: center;
+    margin: 10px auto;
+    display: none;
+}
